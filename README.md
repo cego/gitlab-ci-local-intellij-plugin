@@ -1,5 +1,9 @@
 # Plugin for GitlabCiLocal for IntelliJ IDEs
-[GitlabCiLocal](https://github.com/firecow/gitlab-ci-local)
+Integrates [GitlabCiLocal](https://github.com/firecow/gitlab-ci-local) with all the Jetbrains IDEs. 
+
+## Install
+Install via Jetbrains Marketplace.
+https://plugins.jetbrains.com/plugin/19100-gitlab-ci-local-helper
 
 <!-- Plugin description -->
 **GitlabCiLocal IntelliJ  Plugin** is a plugin integrating GitlabCiLocal with IntelliJ IDEs.
