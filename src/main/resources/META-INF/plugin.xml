@@ -1,0 +1,16 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>dk.cego.gitlab_ci_local_plugin</id>
+    <name>Gitlab-CI-Local Helper</name>
+    <vendor>cego.dk</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="GitlabCiLocal" anchor="right" factoryClass="dk.cego.gitlab_ci_local_plugin.GitlabCiLocalToolWindowFactory"/>
+        <configurationType implementation="dk.cego.gitlab_ci_local_plugin.GclRunConfigurationType"/>
+    </extensions>
+
+    <applicationListeners>
+    </applicationListeners>
+</idea-plugin>
