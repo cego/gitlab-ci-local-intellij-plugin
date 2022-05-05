@@ -37,7 +37,7 @@ class GclToolWindow(private var project: Project) {
     private var checkBox: JCheckBox? = null
 
     init {
-        this.tree?.model = DefaultTreeModel(DefaultMutableTreeNode(this.project.name));
+        this.tree?.model = DefaultTreeModel(DefaultMutableTreeNode(this.project.name))
         refreshButton!!.addActionListener { refresh() }
         refresh()
     }
@@ -85,16 +85,16 @@ class GclToolWindow(private var project: Project) {
             GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, listOf("gitlab-ci-local", "--list")))
                 .withRedirectErrorStream(true)
         runConfiguration.workDirectory = File(project.basePath!!)
-        return ExecUtil.execAndGetOutput(runConfiguration);
+        return ExecUtil.execAndGetOutput(runConfiguration)
     }
 
     fun showGclJobs(jobs: List<GclJob>) {
         // group jobs by stage
-        val stages = ArrayList<GclStage>();
+        val stages = ArrayList<GclStage>()
         for (job in jobs) {
             var stage = stages.find { it.stage == job.stage }
             if (stage == null) {
-                stage = GclStage(job.stage, ArrayList<GclJob>())
+                stage = GclStage(job.stage, ArrayList())
                 stages.add(stage)
             }
             // add to list
@@ -132,7 +132,7 @@ class GclToolWindow(private var project: Project) {
     }
 
 
-    fun addMouseListener() {
+    private fun addMouseListener() {
         val ml: MouseListener = object : MouseAdapter() {
             override fun mousePressed(e: MouseEvent) {
                 val selRow = tree!!.getRowForLocation(e.x, e.y)
@@ -141,11 +141,11 @@ class GclToolWindow(private var project: Project) {
                     val script =
                         selPath.path[2].toString() + " " + (if (checkBox!!.isSelected) "--needs" else "--no-needs")
                     val runner: RunnerAndConfigurationSettings = RunManager.getInstance(project)
-                        .createConfiguration(script, GclRunConfigurationType::class.java);
-                    RunManager.getInstance(project).addConfiguration(runner);
+                        .createConfiguration(script, GclRunConfigurationType::class.java)
+                    RunManager.getInstance(project).addConfiguration(runner)
                     // set the configuration as the selected configuration
-                    RunManager.getInstance(project).selectedConfiguration = runner;
-                    val executor: Executor = DefaultRunExecutor.getRunExecutorInstance();
+                    RunManager.getInstance(project).selectedConfiguration = runner
+                    val executor: Executor = DefaultRunExecutor.getRunExecutorInstance()
                     ProgramRunnerUtil.executeConfiguration(runner, executor)
                 }
             }

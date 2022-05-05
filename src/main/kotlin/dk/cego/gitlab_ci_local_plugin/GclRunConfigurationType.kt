@@ -4,7 +4,6 @@ package dk.cego.gitlab_ci_local_plugin
 import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.ConfigurationType
 import com.intellij.icons.AllIcons
-import org.jetbrains.sdk.runConfiguration.GclRunConfigurationFactory
 import javax.swing.Icon
 
 class GclRunConfigurationType : ConfigurationType {

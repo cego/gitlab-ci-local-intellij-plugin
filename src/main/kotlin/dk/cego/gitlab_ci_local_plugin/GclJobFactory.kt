@@ -2,15 +2,14 @@ package dk.cego.gitlab_ci_local_plugin
 
 class GclJobFactory {
     class HeaderLocations {
-        val name = 0;
-        var description = 0;
-        var stage = 0;
-        var glWhen = 0;
-        var allowFailure = 0;
-        var needs = 0;
-
+        val name = 0
+        var description = 0
+        var stage = 0
+        var glWhen = 0
+        var allowFailure = 0
+        var needs = 0
     }
-    fun parseJobLine(line: String, headerLocations: HeaderLocations): GclJob {
+    private fun parseJobLine(line: String, headerLocations: HeaderLocations): GclJob {
         val name = line.substring(headerLocations.name, headerLocations.description).trim()
         val description = line.substring(headerLocations.description, headerLocations.stage).trim()
         val stage = line.substring(headerLocations.stage, headerLocations.glWhen).trim()
@@ -21,7 +20,7 @@ class GclJobFactory {
         return GclJob(name, description, stage, glWhen, allowFailure, needs)
     }
 
-    fun parseHeader(line: String): HeaderLocations {
+    private fun parseHeader(line: String): HeaderLocations {
         val headerLocations = HeaderLocations()
         headerLocations.description = line.indexOf("description")
         headerLocations.stage = line.indexOf("stage")
