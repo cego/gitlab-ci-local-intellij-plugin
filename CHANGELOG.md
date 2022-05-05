@@ -5,8 +5,9 @@
 ## [Unreleased]
 
 ## [0.0.2]
-### Changed
- - Added logo, removed warnings from codebase.
+**Full Changelog**: https://github.com/cego/gitlab-ci-local-intellij-plugin/compare/0.0.1...v0.0.2
+
+## [0.0.2]
 
 ## [0.0.1]
 ### Changed
