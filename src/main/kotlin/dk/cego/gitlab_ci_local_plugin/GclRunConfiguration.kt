@@ -35,9 +35,7 @@ class GclRunConfiguration(project: Project?, factory: ConfigurationFactory?, nam
             @Throws(ExecutionException::class)
             override fun startProcess(): ProcessHandler {
                 val script = "export FORCE_COLOR=true &&".split(" ") + listOf(scriptName!!) + name.split(" ")
-                val commandLine = GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script)).withEnvironment(
-                    mapOf("FORCE_COLOR" to "true")
-                )
+                val commandLine = GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script))
 
                 commandLine.workDirectory = File(project.basePath!!)
                 val processHandler = ProcessHandlerFactory.getInstance().createColoredProcessHandler(commandLine)
