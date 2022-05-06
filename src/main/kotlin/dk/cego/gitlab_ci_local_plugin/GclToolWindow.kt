@@ -1,8 +1,5 @@
-@file:Suppress("UnstableApiUsage")
-
 package dk.cego.gitlab_ci_local_plugin
 
-import com.google.common.io.Resources.getResource
 import com.intellij.execution.Executor
 import com.intellij.execution.ProgramRunnerUtil
 import com.intellij.execution.RunManager
@@ -11,6 +8,7 @@ import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.process.ProcessOutput
 import com.intellij.execution.util.ExecUtil
+import com.intellij.icons.AllIcons
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
@@ -112,12 +110,10 @@ class GclToolWindow(private var project: Project) {
             root.add(stageNode)
         }
 
-        val imageIcon = ImageIcon(getResource("general/gearPlain_dark.png"))
-        val folderIcon = ImageIcon(getResource("nodes/package.png"))
         val renderer = DefaultTreeCellRenderer()
-        renderer.leafIcon = imageIcon
-        renderer.openIcon = folderIcon
-        renderer.closedIcon = folderIcon
+        renderer.leafIcon = AllIcons.RunConfigurations.TestState.Run
+        renderer.openIcon = AllIcons.Nodes.Folder
+        renderer.closedIcon = AllIcons.Nodes.Folder
         // on
         tree?.cellRenderer = renderer
         tree?.model = DefaultTreeModel(root)
