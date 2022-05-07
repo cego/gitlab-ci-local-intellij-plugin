@@ -10,4 +10,5 @@ https://plugins.jetbrains.com/plugin/19100-gitlab-ci-local-helper
 
 It creates a toolbar on the right side of the IDE to quick launch any GitlabCI job locally.
 
+Requires the CLI-tool [GitlabCiLocal](https://github.com/firecow/gitlab-ci-local) to be installed.
 <!-- Plugin description end -->
