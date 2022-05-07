@@ -7,12 +7,17 @@ import com.intellij.execution.process.ProcessOutput
 import com.intellij.execution.util.ExecUtil
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.ui.popup.Balloon
 import com.intellij.openapi.ui.popup.JBPopupFactory
+import com.intellij.openapi.vfs.VirtualFileManager
+import com.intellij.openapi.vfs.newvfs.BulkFileListener
+import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 import java.awt.Color
 import java.awt.event.MouseAdapter
 import java.awt.event.MouseEvent
@@ -35,6 +40,24 @@ class GclToolWindow(private var project: Project) {
         this.tree?.model = DefaultTreeModel(DefaultMutableTreeNode(this.project.name))
         refreshButton!!.addActionListener { refresh() }
         refresh()
+
+        project.messageBus.connect().subscribe(VirtualFileManager.VFS_CHANGES, object : BulkFileListener {
+            override fun after(events: List<VFileEvent>) {
+                for (event in events) {
+                    if (event.path.contains(".gitlab-ci-local")) {
+                        val path = event.path.substring(0, event.path.indexOf(".gitlab-ci-local")) + ".gitlab-ci-local"
+                        val file = VirtualFileManager.getInstance().findFileByUrl("file://${path}")
+                        if (file != null) {
+                            val modules = ModuleManager.getInstance(project).modules
+                            val model = ModuleRootManager.getInstance(modules.first()).modifiableModel
+                            println("file: ${file.path}")
+                            model.addContentEntry(file).addExcludeFolder(file)
+                            model.commit()
+                        }
+                    }
+                }
+            }
+        })
     }
 
     private fun refresh() {
@@ -44,12 +67,11 @@ class GclToolWindow(private var project: Project) {
                 var output: ProcessOutput? = null;
                 try {
                     output = gclList()
-                }
-                catch (e: ExecutionException) {
+                } catch (e: ExecutionException) {
                     errorMessage = e.message!!
                 }
 
-                if(output != null) {
+                if (output != null) {
                     errorMessage = output.stderr.ifEmpty { output.stdout }
                 }
                 refreshButton?.text = ""
