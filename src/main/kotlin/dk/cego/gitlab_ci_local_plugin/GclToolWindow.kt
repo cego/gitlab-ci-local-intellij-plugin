@@ -1,9 +1,6 @@
 package dk.cego.gitlab_ci_local_plugin
 
-import com.intellij.execution.Executor
-import com.intellij.execution.ProgramRunnerUtil
-import com.intellij.execution.RunManager
-import com.intellij.execution.RunnerAndConfigurationSettings
+import com.intellij.execution.*
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.process.ProcessOutput
@@ -43,14 +40,25 @@ class GclToolWindow(private var project: Project) {
     private fun refresh() {
         val task: Task.Backgroundable = object : Task.Backgroundable(project, "Fetching Gitlab-CI jobs...", true) {
             override fun run(indicator: ProgressIndicator) {
-                val output = gclList()
+                var errorMessage = "";
+                var output: ProcessOutput? = null;
+                try {
+                    output = gclList()
+                }
+                catch (e: ExecutionException) {
+                    errorMessage = e.message!!
+                }
+
+                if(output != null) {
+                    errorMessage = output.stderr.ifEmpty { output.stdout }
+                }
                 refreshButton?.text = ""
-                if (output.exitCode != 0) {
+                if (output == null || output.exitCode != 0) {
                     // show IDE balloon
                     ApplicationManager.getApplication().invokeLater {
                         JBPopupFactory.getInstance()
                             .createHtmlTextBalloonBuilder(
-                                "<html>Error:<br>${output.stderr.ifEmpty { output.stdout }}</html>",
+                                "<html>Error:<br>${errorMessage}</html>",
                                 null,
                                 Color.BLACK,
                                 Color.RED,
