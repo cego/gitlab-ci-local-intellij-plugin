@@ -34,10 +34,10 @@ class GclRunConfiguration(project: Project?, factory: ConfigurationFactory?, nam
         return object : CommandLineState(executionEnvironment) {
             @Throws(ExecutionException::class)
             override fun startProcess(): ProcessHandler {
-                val script = "export FORCE_COLOR=true &&".split(" ") + listOf(scriptName!!) + name.split(" ")
+                val script = listOf(scriptName!!) + name.split(" ")
                 val commandLine = PtyCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script))
-
                 commandLine.workDirectory = File(project.basePath!!)
+                commandLine.charset = Charsets.UTF_8
                 val processHandler = ProcessHandlerFactory.getInstance().createColoredProcessHandler(commandLine)
                 ProcessTerminatedListener.attach(processHandler)
                 return processHandler
