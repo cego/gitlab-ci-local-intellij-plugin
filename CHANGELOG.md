@@ -2,7 +2,7 @@
 
 # GitlabCiLocal IntelliJ plugin Changelog
 
-## [0.0.3] - 2022-05-08
+## [0.0.4] - 2022-05-09
 ### New features
 - Run gitlab jobs interactively with new TTY functionality.
 - Automatically marks .gitlab-ci-local folder as excluded.
