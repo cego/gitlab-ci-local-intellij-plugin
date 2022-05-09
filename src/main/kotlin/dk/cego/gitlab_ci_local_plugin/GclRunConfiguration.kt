@@ -35,8 +35,9 @@ class GclRunConfiguration(project: Project?, factory: ConfigurationFactory?, nam
             @Throws(ExecutionException::class)
             override fun startProcess(): ProcessHandler {
                 val script = listOf(scriptName!!) + name.split(" ")
-                val commandLine = GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script))
+                val commandLine = PtyCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script)).withInitialColumns(PtyCommandLine.MAX_COLUMNS)
                 commandLine.workDirectory = File(project.basePath!!)
+                commandLine.charset = Charsets.UTF_8
                 val processHandler = ProcessHandlerFactory.getInstance().createColoredProcessHandler(commandLine)
                 ProcessTerminatedListener.attach(processHandler)
                 return processHandler

@@ -25,7 +25,7 @@
      showgrid="false"
      inkscape:zoom="36.375"
      inkscape:cx="44.19244"
-     inkscape:cy="21.182131"
+     inkscape:cy="21.209622"
      inkscape:window-width="3840"
      inkscape:window-height="2036"
      inkscape:window-x="-12"
@@ -101,16 +101,22 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
-       x="10.529209"
-       y="29.800688"
-       id="text9344"><tspan
-         sodipodi:role="line"
-         id="tspan9342"
-         x="10.529209"
-         y="29.800688"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'MesloLGS NF';-inkscape-font-specification:'MesloLGS NF';fill:#000000">GCL</tspan></text>
+    <g
+       aria-label="GCL"
+       id="text9344"
+       style="font-size:16px;line-height:1.25">
+      <path
+         d="m 19.154209,28.83975 q -0.632812,0.585938 -1.429687,0.890625 -0.789063,0.296875 -1.710938,0.296875 -2.21875,0 -3.453125,-1.585937 -1.234375,-1.59375 -1.234375,-4.460938 0,-2.859375 1.25,-4.453125 1.25,-1.601562 3.476563,-1.601562 0.734375,0 1.40625,0.210937 0.671875,0.203125 1.296875,0.625 v 1.617188 Q 18.122959,19.77725 17.458897,19.496 q -0.664063,-0.289062 -1.40625,-0.289062 -1.539063,0 -2.3125,1.195312 -0.765625,1.1875 -0.765625,3.578125 0,2.429688 0.742187,3.601563 0.75,1.164062 2.296875,1.164062 0.523438,0 0.914063,-0.117187 0.398437,-0.125 0.71875,-0.382813 v -3.132812 h -1.695313 v -1.296875 h 3.203125 z"
+         style="font-family:'MesloLGS NF';-inkscape-font-specification:'MesloLGS NF'"
+         id="path283" />
+      <path
+         d="m 28.544834,29.386625 q -0.601562,0.320313 -1.234375,0.476563 -0.632812,0.164062 -1.34375,0.164062 -2.242187,0 -3.484375,-1.585937 -1.234375,-1.585938 -1.234375,-4.460938 0,-2.859375 1.242188,-4.453125 1.25,-1.601562 3.476562,-1.601562 0.710938,0 1.34375,0.164062 0.632813,0.15625 1.234375,0.476563 V 20.1835 q -0.578125,-0.476562 -1.242187,-0.726562 -0.664063,-0.25 -1.335938,-0.25 -1.539062,0 -2.304687,1.1875 -0.765625,1.1875 -0.765625,3.585937 0,2.390625 0.765625,3.578125 0.765625,1.1875 2.304687,1.1875 0.6875,0 1.34375,-0.25 0.664063,-0.25 1.234375,-0.726562 z"
+         style="font-family:'MesloLGS NF';-inkscape-font-specification:'MesloLGS NF'"
+         id="path285" />
+      <path
+         d="m 31.474522,18.136625 h 1.585937 v 10.335938 h 5.632813 v 1.328125 h -7.21875 z"
+         style="font-family:'MesloLGS NF';-inkscape-font-specification:'MesloLGS NF'"
+         id="path287" />
+    </g>
   </g>
 </svg>
