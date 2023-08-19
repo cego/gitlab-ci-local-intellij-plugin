@@ -7,10 +7,8 @@ import com.intellij.openapi.startup.StartupActivity
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.newvfs.BulkFileListener
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
-import kotlin.io.path.Path
-import kotlin.io.path.createDirectory
-import kotlin.io.path.exists
-import kotlin.io.path.ExperimentalPathApi
+import com.intellij.util.io.delete
+import kotlin.io.path.*
 
 
 @OptIn(ExperimentalPathApi::class)
@@ -32,17 +30,5 @@ class GclStartup : StartupActivity {
                 }
             }
         })
-
-        // Create .gitlab-ci-local folder in project.basePath, it should automatically be excluded by above event.
-        val basePath = project.basePath
-        if(basePath == null){
-            return
-        }
-        val gitlabCiYmlPath = Path(basePath).resolve(".gitlab-ci.yml")
-        val folderPath = Path(basePath).resolve(".gitlab-ci-local")
-        if (gitlabCiYmlPath.exists() && !folderPath.exists()) {
-            folderPath.createDirectory()
-        }
     }
-
 }
