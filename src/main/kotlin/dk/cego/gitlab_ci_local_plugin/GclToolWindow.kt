@@ -29,7 +29,6 @@ import javax.swing.tree.DefaultTreeCellRenderer
 import javax.swing.tree.DefaultTreeModel
 import javax.swing.tree.TreePath
 
-
 class GclToolWindow(private var project: Project) {
     private var tree: JTree? = null
     private var refreshButton: JButton? = null
@@ -38,31 +37,16 @@ class GclToolWindow(private var project: Project) {
 
     init {
         this.tree?.model = DefaultTreeModel(DefaultMutableTreeNode(this.project.name))
+        refreshButton!!.icon = AllIcons.Actions.Refresh
+        refreshButton!!.text = "Refresh"
         refreshButton!!.addActionListener { refresh() }
         refresh()
-
-        project.messageBus.connect().subscribe(VirtualFileManager.VFS_CHANGES, object : BulkFileListener {
-            override fun after(events: List<VFileEvent>) {
-                for (event in events) {
-                    if (event.path.contains(".gitlab-ci-local")) {
-                        val path = event.path.substring(0, event.path.indexOf(".gitlab-ci-local")) + ".gitlab-ci-local"
-                        val file = VirtualFileManager.getInstance().findFileByUrl("file://${path}")
-                        if (file != null) {
-                            val modules = ModuleManager.getInstance(project).modules
-                            val model = ModuleRootManager.getInstance(modules.first()).modifiableModel
-                            println("file: ${file.path}")
-                            model.addContentEntry(file).addExcludeFolder(file)
-                            model.commit()
-                        }
-                    }
-                }
-            }
-        })
     }
 
     private fun refresh() {
         val task: Task.Backgroundable = object : Task.Backgroundable(project, "Fetching Gitlab-CI jobs...", true) {
             override fun run(indicator: ProgressIndicator) {
+                refreshButton?.text = "..."
                 var errorMessage = "";
                 var output: ProcessOutput? = null;
                 try {
@@ -74,7 +58,6 @@ class GclToolWindow(private var project: Project) {
                 if (output != null) {
                     errorMessage = output.stderr.ifEmpty { output.stdout }
                 }
-                refreshButton?.text = ""
                 if (output == null || output.exitCode != 0) {
                     // show IDE balloon
                     ApplicationManager.getApplication().invokeLater {
@@ -93,6 +76,7 @@ class GclToolWindow(private var project: Project) {
                                 Balloon.Position.atRight
                             )
                     }
+                    refreshButton?.text = "Refresh"
                     return
                 }
 
@@ -103,6 +87,7 @@ class GclToolWindow(private var project: Project) {
                 ApplicationManager.getApplication().invokeLater {
                     showGclJobs(gclJobs)
                 }
+                refreshButton?.text = "Refresh"
             }
         }
         ProgressManager.getInstance().run(task)
