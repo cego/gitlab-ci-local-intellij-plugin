@@ -110,7 +110,7 @@ class GclToolWindow(private var project: Project) {
 
     private fun gclList(): ProcessOutput {
         val runConfiguration =
-            GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, listOf("gitlab-ci-local", "--list")))
+            GeneralCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, listOf("gitlab-ci-local", "--list-json")))
                 .withRedirectErrorStream(true)
         runConfiguration.workDirectory = File(project.basePath!!)
         return ExecUtil.execAndGetOutput(runConfiguration)
