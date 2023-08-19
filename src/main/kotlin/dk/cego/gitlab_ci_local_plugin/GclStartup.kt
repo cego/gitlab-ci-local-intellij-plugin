@@ -34,8 +34,13 @@ class GclStartup : StartupActivity {
         })
 
         // Create .gitlab-ci-local folder in project.basePath, it should automatically be excluded by above event.
-        val folderPath = Path(project.basePath!!).resolve(".gitlab-ci-local")
-        if (!folderPath.exists()) {
+        val basePath = project.basePath
+        if(basePath == null){
+            return
+        }
+        val gitlabCiYmlPath = Path(basePath).resolve(".gitlab-ci.yml")
+        val folderPath = Path(basePath).resolve(".gitlab-ci-local")
+        if (gitlabCiYmlPath.exists() && !folderPath.exists()) {
             folderPath.createDirectory()
         }
     }
