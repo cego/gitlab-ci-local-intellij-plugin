@@ -2,6 +2,10 @@
 
 # GitlabCiLocal IntelliJ plugin Changelog
 
+## [0.0.5] - 2023-08-19
+Updated to work on newer Intellij platforms.
+Should be more robust now on excluding .gitlab-ci-local folder.
+
 ## [0.0.4] - 2022-05-09
 ### New features
 - Run gitlab jobs interactively with new TTY functionality.
