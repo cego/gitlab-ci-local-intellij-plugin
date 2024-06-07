@@ -34,7 +34,9 @@ class GclRunConfiguration(project: Project?, factory: ConfigurationFactory?, nam
         return object : CommandLineState(executionEnvironment) {
             @Throws(ExecutionException::class)
             override fun startProcess(): ProcessHandler {
-                val script = listOf(scriptName!!) + name.split(" ")
+                val needs = name.contains("--needs")
+                val job = name.split("--")[0].trim()
+                val script = listOf(scriptName!!) + job + (if (needs) "--needs" else "--no-needs")
                 val commandLine = PtyCommandLine(WslUtils.rewriteToWslExec(project.basePath!!, script)).withInitialColumns(PtyCommandLine.MAX_COLUMNS)
                 commandLine.workDirectory = File(project.basePath!!)
                 commandLine.charset = Charsets.UTF_8
