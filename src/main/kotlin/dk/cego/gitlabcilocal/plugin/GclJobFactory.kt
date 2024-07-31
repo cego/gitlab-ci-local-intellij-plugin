@@ -1,4 +1,4 @@
-package dk.cego.gitlab_ci_local_plugin
+package dk.cego.gitlabcilocal.plugin
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -12,6 +12,6 @@ class GclJobFactory {
         val jsonString = fileContent.substring(fileContent.indexOf('['))
 
         val mapper = ObjectMapper().registerKotlinModule()
-        return mapper.readValue<List<GclJob>>(jsonString);
+        return mapper.readValue<List<GclJob>>(jsonString)
     }
 }

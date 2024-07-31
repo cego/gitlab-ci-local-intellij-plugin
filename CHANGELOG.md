@@ -2,6 +2,9 @@
 
 # GitlabCiLocal IntelliJ plugin Changelog
 
+## [0.0.6] - 2024-07-30
+Add Option to choose if a schema validation shall be executed or not
+
 ## [0.0.5] - 2023-08-19
 Updated to work on newer Intellij platforms.
 Should be more robust now on excluding .gitlab-ci-local folder.

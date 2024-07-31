@@ -7,9 +7,9 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="GitlabCiLocal" anchor="right" factoryClass="dk.cego.gitlab_ci_local_plugin.GitlabCiLocalToolWindowFactory"/>
-        <configurationType implementation="dk.cego.gitlab_ci_local_plugin.GclRunConfigurationType"/>
-        <postStartupActivity implementation="dk.cego.gitlab_ci_local_plugin.GclStartup" />
+        <toolWindow id="GitlabCiLocal" anchor="right" factoryClass="dk.cego.gitlabcilocal.plugin.GitlabCiLocalToolWindowFactory"/>
+        <configurationType implementation="dk.cego.gitlabcilocal.plugin.GclRunConfigurationType"/>
+        <postStartupActivity implementation="dk.cego.gitlabcilocal.plugin.GclStartupActivity" />
     </extensions>
 
     <applicationListeners>
